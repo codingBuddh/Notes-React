@@ -1,10 +1,10 @@
-// src/components/NotesList.jsx
 import React, { useEffect, useState } from "react";
 import { IoIosAddCircle } from "react-icons/io";
 import { NavLink } from "react-router-dom";
+
 const NotesList = ({ user }) => {
-  // console.log(user);
   const [notes, setNotes] = useState([]);
+
   useEffect(() => {
     if (user) {
       fetchNotes();
@@ -19,12 +19,12 @@ const NotesList = ({ user }) => {
         },
       });
       const data = await response.json();
-      // console.log(data);
       setNotes(data);
     } catch (error) {
       console.error("Error fetching notes:", error);
     }
   };
+
   const handleDeleteNote = async (id) => {
     try {
       await fetch(`http://localhost:8000/${id}`, {
@@ -38,46 +38,59 @@ const NotesList = ({ user }) => {
       console.error("Error deleting note:", error);
     }
   };
+
   return (
     <>
-      <ul className="mt-6 flex flex-row flex-wrap">
+      <ul className="mt-6 flex flex-wrap gap-4">
         <NavLink to={"/create"}>
-          <div className="">
-            <IoIosAddCircle className="h-[100px] w-[100px]" />
+          <div className="flex items-center justify-center w-32 h-32 bg-gray-100 rounded-lg shadow-md hover:bg-gray-200 transition-colors">
+            <IoIosAddCircle className="text-green-500 w-16 h-16" />
           </div>
         </NavLink>
         {notes &&
           notes.length > 0 &&
           notes.map((note) => (
-            <li key={note._id}>
-              <div className="min-w-[150px] flex flex-col min-h-[250px]">
-                <div className="action text-black">
-                  <div className="flex flex-row ">
-                    <a
-                      className="action-btn text-black"
-                      href={`/edit/${note._id}`}
-                    >
-                      Edit
-                    </a>
-                    <button
-                      className="action-btn  text-black"
-                      onClick={() => handleDeleteNote(note._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-                <p className="note-title">{note.title}</p>
-                <p
-                  className="note-content"
-                  onClick={() => showFullContent(note.content, note.title)}
+            <li
+              key={note._id}
+              className="bg-white shadow-md rounded-lg p-4 min-w-[200px] flex flex-col justify-between"
+            >
+              <div className="flex justify-between mb-4">
+                <a
+                  className="text-blue-500 hover:underline"
+                  href={`/edit/${note._id}`}
                 >
-                  {note.content}
-                </p>
+                  Edit
+                </a>
+                <button
+                  className="text-red-500 hover:underline"
+                  onClick={() => handleDeleteNote(note._id)}
+                >
+                  Delete
+                </button>
+              </div>
+              <div
+                onClick={() => showFullContent(note.content, note.title)}
+                className="cursor-pointer"
+              >
+                <p className="font-bold text-lg mb-2">{note.title}</p>
+                <p className="text-gray-700 cursor-pointer">{note.content}</p>
               </div>
             </li>
           ))}
       </ul>
+      <dialog
+        id="content-dialog"
+        className="centerdialog- rounded-lg p-4 shadow-lg "
+      >
+        <h2 className="dialog-title font-bold text-xl mb-2"></h2>
+        <p className="dialog-content text-gray-700"></p>
+        <button
+          onClick={() => document.getElementById("content-dialog").close()}
+          className="mt-4 text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded"
+        >
+          Close
+        </button>
+      </dialog>
     </>
   );
 };

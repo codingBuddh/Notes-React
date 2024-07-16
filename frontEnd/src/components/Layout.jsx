@@ -16,7 +16,7 @@ const Layout = ({ children, user }) => {
       <div className="flex flex-col h-screen bg-gray-900 text-white">
         <header className="p-4 border-b border-gray-700">
           <div className="text-center">
-            <h1 className="text-3xl font-bold">Aman's Note</h1>
+            <h1 className="text-3xl font-bold">Creative Notes App</h1>
             <span className="text-gray-400">Keep Your Notes Here!</span>
           </div>
         </header>
@@ -45,7 +45,7 @@ const Layout = ({ children, user }) => {
             </span>
           </div>
           <div>
-            <h1 className="text-3xl font-bold ">Aman's Note</h1>
+            <h1 className="text-3xl font-bold ">Creative Notes App</h1>
             <span className="text-gray-400">Keep Your Notes Here!</span>
           </div>
         </div>

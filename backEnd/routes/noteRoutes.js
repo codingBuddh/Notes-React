@@ -6,6 +6,7 @@ import {
   updateNote,
 } from "../controllers/noteController.js";
 import { body, param, validationResult } from "express-validator";
+import { Note } from "../models/Note.js";
 
 const router = express.Router();
 
@@ -18,6 +19,16 @@ router.get("/", async (req, res) => {
     res.json(notes);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/:noteId", async (req, res) => {
+  const { noteId } = req.params;
+  try {
+    const note = await Note.findById(noteId);
+    res.json(note);
+  } catch (error) {
+    res.status(500).json({ error: "coudnt find the note" });
   }
 });
 
