@@ -80,7 +80,7 @@ const NotesList = ({ user }) => {
       </ul>
       <dialog
         id="content-dialog"
-        className="centerdialog- rounded-lg p-4 shadow-lg "
+        className=" rounded-lg p-4 shadow-lg content-center "
       >
         <h2 className="dialog-title font-bold text-xl mb-2"></h2>
         <p className="dialog-content text-gray-700"></p>
