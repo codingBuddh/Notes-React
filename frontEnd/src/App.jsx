@@ -6,12 +6,12 @@ import {
   Routes,
   useNavigate,
 } from "react-router-dom";
-import Layout from "./components/Layout";
-import AddNote from "./components/AddNote";
-import EditNote from "./components/EditNote";
-import NotesList from "./components/NotesList";
-import Login from "./login/Login";
-import Signup from "./signup/Signup";
+import Layout from "./Layout/Layout";
+import AddNote from "./components/Notes/AddNote";
+import EditNote from "./components/Notes/EditNote";
+import NotesList from "./components/Notes/NotesList";
+import Login from "./pages/login/Login";
+import Signup from "./pages/signup/Signup";
 
 function App() {
   const [user, setUser] = useState(
